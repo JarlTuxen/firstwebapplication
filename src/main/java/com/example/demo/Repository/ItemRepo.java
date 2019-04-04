@@ -1,6 +1,10 @@
 package com.example.demo.Repository;
 
 import com.example.demo.Model.Item;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -9,16 +13,15 @@ import java.util.List;
 @Repository
 public class ItemRepo {
 
+    @Autowired
+    JdbcTemplate template;
+
     public List<Item> fetchAllItems(){
 
-        //this is where the DB communication will be done
+        String sql = "SELECT * FROM item";
+        RowMapper<Item> rowMapper = new BeanPropertyRowMapper<>(Item.class);
 
-        List<Item> items = new ArrayList<>();
+        return template.query(sql, rowMapper);
 
-        items.add(new Item("PC", 100));
-        items.add(new Item("LapTop", 150));
-        items.add(new Item("Tablet", 125));
-
-        return items;
     }
 }
