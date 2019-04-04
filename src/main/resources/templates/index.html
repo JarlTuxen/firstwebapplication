@@ -20,6 +20,7 @@
     <h1>All our items</h1>
 
     <p th:each="item : ${items}">
+        <a style="color: blue;" th:href="@{'/update/' + ${item.id}}">update</a>
         <span th:text="${item.name}"/>
         <span th:text="${item.price}"/>
         <a style="color: red;" th:href="@{'/delete/' + ${item.id}}">delete</a>

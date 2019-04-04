@@ -32,4 +32,15 @@ public class ItemRepo {
         String sql = "DELETE FROM item WHERE id=?";
         template.update(sql, id);
     }
+
+    public Item findItemById(int id){
+        String sql = "SELECT * FROM item WHERE id=?";
+        RowMapper<Item> rowMapper = new BeanPropertyRowMapper<>(Item.class);
+        return template.queryForObject(sql, rowMapper, id);
+    }
+
+    public void updateItem(Item item){
+        String sql = "UPDATE item SET name=?, price=? WHERE id=?";
+        template.update(sql, item.getName(), item.getPrice(), item.getId());
+    }
 }

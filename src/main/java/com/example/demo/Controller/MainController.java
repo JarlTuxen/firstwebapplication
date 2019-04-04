@@ -40,4 +40,16 @@ public class MainController {
         return "redirect:/";
     }
 
+    @GetMapping("/update/{id}")
+    public String update(@PathVariable("id") int id, Model model){
+        model.addAttribute("item", itemService.findItemById(id));
+        return "update";
+    }
+
+    @PostMapping("/update")
+    public String updateDoIt(@ModelAttribute Item item){
+        itemService.updateItem(item);
+        return "redirect:/";
+    }
+
 }
