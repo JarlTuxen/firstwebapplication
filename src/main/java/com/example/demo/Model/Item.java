@@ -13,9 +13,18 @@ public class Item {
     public Item() {
     }
 
-    public Item(String name, int price) {
+    public Item(int id, String name, int price) {
+        this.id = id;
         this.name = name;
         this.price = price;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {

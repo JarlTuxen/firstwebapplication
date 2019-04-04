@@ -17,11 +17,19 @@ public class ItemRepo {
     JdbcTemplate template;
 
     public List<Item> fetchAllItems(){
-
         String sql = "SELECT * FROM item";
         RowMapper<Item> rowMapper = new BeanPropertyRowMapper<>(Item.class);
 
         return template.query(sql, rowMapper);
+    }
 
+    public void addItem(Item item){
+        String sql = "INSERT INTO item (id, name, price) VALUES (?, ?, ?)";
+        template.update(sql, item.getId(), item.getName(), item.getPrice());
+    }
+
+    public void deleteItem(int id){
+        String sql = "DELETE FROM item WHERE id=?";
+        template.update(sql, id);
     }
 }
